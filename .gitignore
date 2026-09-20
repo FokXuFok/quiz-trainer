@@ -1,0 +1,14 @@
+# 个人做题数据（不发布）
+progress.json
+wrong.json
+tiku.backup.json
+
+# 打包产物
+*.exe
+build/
+dist/
+*.spec
+__pycache__/
+
+# 资料 PDF（版权与时效原因不随仓库分发）
+*.pdf
