@@ -3,8 +3,9 @@ progress.json
 wrong.json
 tiku.backup.json
 
-# 打包产物
+# 打包缓存与中间产物（根目录的一键启动版 exe 随仓库分发给用户，不忽略）
 *.exe
+!题库刷题练习.exe
 build/
 dist/
 *.spec

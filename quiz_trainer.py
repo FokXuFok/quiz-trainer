@@ -17,11 +17,26 @@ from tkinter import ttk
 
 if getattr(sys, "frozen", False):
     BASE = os.path.dirname(sys.executable)
+    BUNDLE = getattr(sys, "_MEIPASS", BASE)
 else:
     BASE = os.path.dirname(os.path.abspath(__file__))
+    BUNDLE = BASE
 TIKU_FILE = os.path.join(BASE, "tiku.json")
 WRONG_FILE = os.path.join(BASE, "wrong.json")
 PROGRESS_FILE = os.path.join(BASE, "progress.json")
+
+
+def ensure_tiku():
+    """打包模式下首次启动：从内置资源释放题库到 exe 同目录（exe 同目录可写）"""
+    if os.path.exists(TIKU_FILE) or BUNDLE == BASE:
+        return
+    src = os.path.join(BUNDLE, "tiku.json")
+    if os.path.exists(src):
+        try:
+            import shutil
+            shutil.copy2(src, TIKU_FILE)
+        except Exception:
+            pass
 
 BG = "#F5F7FA"
 FG = "#2B2F36"
@@ -709,6 +724,7 @@ class MainApp(tk.Tk):
 
 
 if __name__ == "__main__":
+    ensure_tiku()
     if not os.path.exists(TIKU_FILE):
         print("错误：找不到题库文件 tiku.json，请通过主界面【导入题库】或将其与本程序放在同一目录。")
         input("按回车键退出...")

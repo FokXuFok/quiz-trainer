@@ -15,17 +15,22 @@
 
 ## 快速开始
 
+**一键启动（推荐）**：仓库根目录已内置打包好的 Windows 单文件版 **[题库刷题练习.exe](题库刷题练习.exe)**，无需安装 Python，双击即可运行（约 10.8MB，首次启动会在程序同目录自动释放内置题库）。
+
+源码运行（需要 Python 3.8+）：
+
 ```bash
-# 需要 Python 3.8+
 python quiz_trainer.py
 ```
 
-Windows 下也可以直接双击 `quiz_trainer.py` 运行。若希望双击无控制台窗口，可改用 `pythonw quiz_trainer.py` 或自行打包：
+如果想要不带内置题库、自行打包，可执行：
 
 ```bash
 pip install pyinstaller
-pyinstaller -F -w quiz_trainer.py
+pyinstaller -F -w --add-data "tiku.json;." quiz_trainer.py
 ```
+
+> 提示：源码运行与 exe 运行行为一致——exe 首次启动时会自动从自身内置资源释放 `tiku.json` 到程序同目录，之后即可正常【导入题库】替换。
 
 ## 导入题库格式（JSON）
 
